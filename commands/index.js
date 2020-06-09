@@ -16,10 +16,10 @@ import WebSocket from "ws";
 import { useLogState, getNetworkAddress } from "../core/utils";
 import {
 	webSocketPort as initWebSocketPort,
-	staticPort as initStaticPort
+	staticPort as initStaticPort,
 } from "../core/config";
 
-import uuid from "uuid/v1";
+import { v1 as uuid } from "uuid";
 
 // import os from "os";
 // import { spawn } from "node-pty";
@@ -68,7 +68,7 @@ const Main = ({ path: watchPath, webSocketPort, staticPort }) => {
 
 		const server = new http.Server((req, res) => {
 			return handler(req, res, {
-				public: absoluteWatchPath
+				public: absoluteWatchPath,
 			});
 		});
 
@@ -97,16 +97,19 @@ const Main = ({ path: watchPath, webSocketPort, staticPort }) => {
 						case "start": {
 							const watchId = uuid();
 
-							const progressWatcher = await watcher(absoluteWatchPath, data => {
-								ws.send(
-									JSON.stringify({
-										watchId,
-										type: "watch-data",
-										data,
-										success: true
-									})
-								);
-							});
+							const progressWatcher = await watcher(
+								absoluteWatchPath,
+								(data) => {
+									ws.send(
+										JSON.stringify({
+											watchId,
+											type: "watch-data",
+											data,
+											success: true,
+										})
+									);
+								}
+							);
 
 							await progressWatcher.start();
 
@@ -129,7 +132,7 @@ const Main = ({ path: watchPath, webSocketPort, staticPort }) => {
 								JSON.stringify({
 									success: true,
 									type: "watch-stop",
-									watchId: stopWatchId
+									watchId: stopWatchId,
 								})
 							);
 							break;
@@ -190,18 +193,18 @@ Main.propTypes = {
 	/// Websocket port
 	webSocketPort: PropTypes.number,
 	/// Static file port
-	staticPort: PropTypes.number
+	staticPort: PropTypes.number,
 };
 
 Main.defaultProps = {
 	path: ".",
 	webSocketPort: initWebSocketPort,
-	staticPort: initStaticPort
+	staticPort: initStaticPort,
 };
 
 Main.shortFlags = {
 	path: "p",
 	webSocketPort: "wp",
-	staticPort: "sp"
+	staticPort: "sp",
 };
 export default Main;
