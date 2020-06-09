@@ -1,0 +1,28 @@
+{
+	"name": "pinsfw.d",
+	"version": "0.2.1",
+	"license": "MIT",
+	"bin": "./build/cli.js",
+	"engines": {
+		"node": ">=8"
+	},
+	"scripts": {
+		"dev": "pastel dev",
+		"build": "pastel build",
+		"prepare": "pastel build"
+	},
+	"files": [
+		"build"
+	],
+	"dependencies": {
+		"fs-extra": "^9.0.1",
+		"ink": "^2.7.1",
+		"nsfw": "^2.0.0",
+		"pastel": "^1.0.3",
+		"prop-types": "^15.7.2",
+		"react": "^16.13.1",
+		"serve-handler": "^6.1.3",
+		"uuid": "^8.1.0",
+		"ws": "^7.3.0"
+	}
+}
