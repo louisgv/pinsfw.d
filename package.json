@@ -1,6 +1,6 @@
 {
 	"name": "pinsfw.d",
-	"version": "0.2.1",
+	"version": "0.0.0",
 	"license": "MIT",
 	"bin": "./build/cli.js",
 	"engines": {
